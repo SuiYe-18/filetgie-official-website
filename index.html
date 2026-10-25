@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FileTgie v0.4.0 — Read-only file statistics &amp; search CLI in pure C</title>
+<title>FileTgie v0.4.1 — Read-only file statistics &amp; search CLI in pure C</title>
 <meta name="description" content="FileTgie is a lightweight, read-only, zero-dependency file statistics and search command-line tool written in pure C for Windows and Linux. LGPL-3.0-or-later.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000000'/%3E%3Ccircle cx='28' cy='28' r='14' fill='none' stroke='%23FFFFFF' stroke-width='6'/%3E%3Cline x1='38' y1='38' x2='52' y2='52' stroke='%23FFFFFF' stroke-width='7' stroke-linecap='square'/%3E%3C/svg%3E">
 <style>
@@ -270,17 +270,17 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
 <section class="hero" id="top">
   <div class="wrap">
     <img class="hero-logo" src="assets/logo_wide_white.png" alt="FileTgie white logo on black">
-    <div class="hero-tag">v0.4.0 · pure C · LGPL-3.0-or-later</div>
+    <div class="hero-tag">v0.4.1 · pure C · LGPL-3.0-or-later</div>
     <h1 data-i18n="hero.title">Lightweight, read-only, zero-dependency file statistics &amp; search CLI</h1>
     <p class="lede" data-i18n="hero.lede">Written in pure C with the standard library only, one source tree builds for Windows and Linux. Every command does one small, predictable thing and never touches your files.</p>
     <div class="cta-row">
-      <a class="btn btn-solid" data-i18n="hero.installer" href="https://github.com/SuiYe-18/FileTgie/releases/latest/download/FileTgie.windows.0.4.0.setup.exe">Download installer (Windows)</a>
+      <a class="btn btn-solid" data-i18n="hero.installer" href="https://github.com/SuiYe-18/FileTgie/releases/latest/download/FileTgie.windows.0.4.1.setup.exe">Download installer (Windows)</a>
       <a class="btn btn-ghost" data-i18n="hero.repo" href="https://github.com/SuiYe-18/FileTgie" target="_blank" rel="noopener">GitHub repository</a>
     </div>
     <div class="cta-row" style="margin-top:10px;">
-      <a class="btn btn-ghost" data-i18n="hero.portable" href="https://github.com/SuiYe-18/FileTgie/releases/latest/download/FileTgie.windows.0.4.0.portable.zip">Windows portable ZIP</a>
-      <a class="btn btn-ghost" data-i18n="hero.linux" href="https://github.com/SuiYe-18/FileTgie/releases/latest/download/FileTgie.source.0.4.0.zip">Linux build from source</a>
-      <a class="btn btn-ghost" data-i18n="hero.source" href="https://github.com/SuiYe-18/FileTgie/releases/latest/download/FileTgie.source.0.4.0.zip">Source archive</a>
+      <a class="btn btn-ghost" data-i18n="hero.portable" href="https://github.com/SuiYe-18/FileTgie/releases/latest/download/FileTgie.windows.0.4.1.portable.zip">Windows portable ZIP</a>
+      <a class="btn btn-ghost" data-i18n="hero.linux" href="https://github.com/SuiYe-18/FileTgie/releases/latest/download/FileTgie.source.0.4.1.zip">Linux build from source</a>
+      <a class="btn btn-ghost" data-i18n="hero.source" href="https://github.com/SuiYe-18/FileTgie/releases/latest/download/FileTgie.source.0.4.1.zip">Source archive</a>
       <a class="btn btn-ghost" data-i18n="hero.explore" href="#commands">Explore 61 commands</a>
     </div>
   </div>
@@ -470,9 +470,9 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
       </div>
       <div class="install-card">
         <h3 data-i18n="install.linuxTitle">Linux — build from source</h3>
-        <p data-i18n-html="install.linuxText">v0.4.0 supplies Linux-compatible source code; run <code>make</code> on a Linux host and start with <code>./FileTgie --lang en help</code>. Inspection commands need no installer, administrator rights or network; <code>checkupdate</code> uses curl for GitHub. The last verified x86_64 glibc prebuilt tarball remains in the v0.3.0 Release; musl/Alpine is not guaranteed.</p>
+        <p data-i18n-html="install.linuxText">v0.4.1 changes only the Windows updater; Linux-compatible source code remains available for <code>make</code>. The verified x86_64 glibc prebuilt package stays unchanged as v0.4.0; musl/Alpine is not guaranteed.</p>
         <pre>make</pre>
-        <a class="btn btn-ghost" data-i18n="install.linuxButton" href="https://github.com/SuiYe-18/FileTgie/releases/latest/download/FileTgie.source.0.4.0.zip">Build Linux from source</a>
+        <a class="btn btn-ghost" data-i18n="install.linuxButton" href="https://github.com/SuiYe-18/FileTgie/releases/latest/download/FileTgie.source.0.4.1.zip">Build Linux from source</a>
       </div>
       <div class="install-card">
         <h3 data-i18n="install.srcTitle">Source code</h3>
@@ -500,10 +500,10 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
       </div>
       <div>
         <h3 data-i18n="footer.version">Version</h3>
-        <p data-i18n-html="footer.versionText">v0.4.0 makes reminder a customizable read-only update check: <code>reminder on</code> defaults to one minute, <code>every N</code> chooses 1-1439 minutes, and daily/hourly remain available. The bundled updater checks GitHub and the website and shows one toast per new version; silent overwrite keeps previous files in a disabled .old folder. Linux prints manual cron and upgrade steps. The version source is src/commands.h (FILETGIE_VERSION).</p>
+        <p data-i18n-html="footer.versionText">v0.4.1 is a Windows patch: the standalone updater shows a white <code>=</code> download bar with green <code>&gt;</code> for completed bytes, and reports the exact download failure reason. The customizable reminder, .old backup overwrite and read-only statistics remain unchanged. Version source: src/commands.h (FILETGIE_VERSION).</p>
       </div>
     </div>
-    <div class="footer-bottom">Copyright (C) 2026 SuiYe_TR · FileTgie v0.4.0 · read-only file statistics &amp; search CLI</div>
+    <div class="footer-bottom">Copyright (C) 2026 SuiYe_TR · FileTgie v0.4.1 · read-only file statistics &amp; search CLI</div>
   </div>
 </footer>
 
@@ -513,7 +513,7 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
 (function () {
   var SITE_I18N = {
     en: {
-      "meta.title": "FileTgie v0.4.0 — Read-only file statistics & search CLI in pure C",
+      "meta.title": "FileTgie v0.4.1 — Read-only file statistics & search CLI in pure C",
       "nav.features": "Features", "nav.commands": "Commands", "nav.quickstart": "Quick start",
       "nav.companions": "Companions", "nav.languages": "Languages", "nav.license": "License",
       "hero.title": "Lightweight, read-only, zero-dependency file statistics & search CLI",
@@ -564,19 +564,19 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
       "install.setupTitle": "Windows installer and overwrite upgrade",
       "install.setupText": "The installer registers App Paths and PATH under Program Files. It detects an installed copy, App Paths registration, or leftover files after a non-official deletion, and keeps the overwrite option checked by default. On overwrite, previous program files move to a disabled <code>.old</code> backup folder; the registry, PATH and shortcuts keep pointing only to the new root-folder files. The bundled updater checks GitHub and the website before launching a silent overwrite install.",
       "install.linuxTitle": "Linux — build from source",
-      "install.linuxText": "v0.4.0 supplies Linux-compatible source code; run <code>make</code> on a Linux host and start with <code>./FileTgie --lang en help</code>. Inspection commands need no installer, administrator rights or network; <code>checkupdate</code> uses curl for GitHub. The last verified x86_64 glibc prebuilt tarball remains in the v0.3.0 Release; musl/Alpine is not guaranteed.",
+      "install.linuxText": "v0.4.1 changes only the Windows updater; Linux-compatible source code remains available for <code>make</code>. The verified x86_64 glibc prebuilt package stays unchanged as v0.4.0; musl/Alpine is not guaranteed.",
       "install.linuxButton": "Build Linux from source", "install.srcTitle": "Source code",
       "install.srcText": "All sources live under <code>src/</code> and use only the C standard library and native platform APIs. Run <code>build.bat</code> on Windows or <code>make</code> on Linux; the Windows updater builds only on Windows.",
       "footer.author": "Author", "footer.license": "License",
       "footer.licenseText": "LGPL-3.0-or-later (GNU Lesser General Public License, version 3 or later). Full legal text in LICENSE; plain-language linking notes in COPYING.",
       "footer.version": "Version",
-      "footer.versionText": "v0.4.0 makes reminder a customizable read-only update check: <code>reminder on</code> defaults to one minute, <code>every N</code> chooses 1-1439 minutes, and daily/hourly remain available. The bundled updater checks GitHub and the website and shows one toast per new version; silent overwrite keeps previous files in a disabled .old folder. Linux prints manual cron and upgrade steps. The version source is src/commands.h (FILETGIE_VERSION).",
+      "footer.versionText": "v0.4.1 is a Windows patch: the standalone updater shows a white <code>=</code> download bar with green <code>&gt;</code> for completed bytes, and reports the exact download failure reason. The customizable reminder, .old backup overwrite and read-only statistics remain unchanged. Version source: src/commands.h (FILETGIE_VERSION).",
       "groups.all": "All", "groups.system": "System & Log", "groups.stats": "Statistics",
       "groups.text": "Text & Lines", "groups.search": "Search & Find", "groups.verify": "Verify & Integrity",
       "note.all": "Showing all {n} commands from CMD_TABLE.", "note.group": "Showing {n} commands in this group."
     },
     cn: {
-      "meta.title": "FileTgie v0.4.0 — 纯 C 只读文件统计与搜索命令行工具",
+      "meta.title": "FileTgie v0.4.1 — 纯 C 只读文件统计与搜索命令行工具",
       "nav.features": "功能", "nav.commands": "命令", "nav.quickstart": "快速开始", "nav.companions": "搭配工具", "nav.languages": "界面语言", "nav.license": "许可证",
       "hero.title": "轻量、只读、零依赖的文件统计与搜索命令行工具",
       "hero.lede": "纯 C 仅用标准库编写，同一套源码可构建 Windows 与 Linux 版本。每条命令只做一件小而确定的事，绝不触碰你的文件。",
@@ -622,19 +622,19 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
       "install.setupTitle": "Windows 安装包与覆盖升级",
       "install.setupText": "安装包在 Program Files 注册 App Paths 与 PATH。它会检测已安装副本、App Paths 注册，或非官方删除后的残留文件，并默认勾选覆盖选项。覆盖时旧程序文件先移入禁用的 <code>.old</code> 备份文件夹；注册表、PATH 与快捷方式始终只指向根目录新文件。内置更新器会先检查 GitHub 与官网，再启动静默覆盖安装。",
       "install.linuxTitle": "Linux — 从源码构建",
-      "install.linuxText": "v0.4.0 提供兼容 Linux 的源码；在 Linux 主机执行 <code>make</code>，再从 <code>./FileTgie --lang en help</code> 开始。检查类命令不需要安装程序、管理员权限或网络；<code>checkupdate</code> 通过 curl 请求 GitHub。最后一个已验证的 x86_64 glibc 预编译包保留在 v0.3.0 Release；不保证 musl/Alpine。",
+      "install.linuxText": "v0.4.1 只改动 Windows 更新器；兼容 Linux 的源码仍可执行 <code>make</code> 构建。已验证的 x86_64 glibc 预编译包保持未改动的 v0.4.0；不保证 musl/Alpine。",
       "install.linuxButton": "获取 Linux 源码", "install.srcTitle": "源代码",
       "install.srcText": "所有源码位于 <code>src/</code>，仅使用 C 标准库与平台原生 API。Windows 运行 <code>build.bat</code>，Linux 运行 <code>make</code>；Windows 更新器只在 Windows 构建。",
       "footer.author": "作者", "footer.license": "许可证",
       "footer.licenseText": "LGPL-3.0-or-later（GNU 宽通用公共许可证，第 3 版或更新）。完整法律文本见 LICENSE，通俗链接说明见 COPYING。",
       "footer.version": "版本",
-      "footer.versionText": "v0.4.0 把 reminder 做成可定制的只读更新检查：<code>reminder on</code> 缺省每 1 分钟，<code>every N</code> 可设置 1–1439 分钟，daily/hourly 继续兼容。内置更新器检查 GitHub 与官网，每个新版本只弹出一次通知；静默覆盖时旧文件进入禁用的 .old 文件夹。Linux 只给出手动 cron 与升级步骤。版本来源是 src/commands.h（FILETGIE_VERSION）。",
+      "footer.versionText": "v0.4.1 是 Windows 补丁：独立更新器用白色 <code>=</code> 显示下载进度，绿色 <code>&gt;</code> 表示已完成字节，并明确报告下载失败原因。可定制提醒、.old 备份覆盖与只读统计保持不变。版本来源：src/commands.h（FILETGIE_VERSION）。",
       "groups.all": "全部", "groups.system": "系统与日志", "groups.stats": "统计",
       "groups.text": "文本与行数", "groups.search": "搜索与查找", "groups.verify": "校验与完整性",
       "note.all": "显示 CMD_TABLE 中的全部 {n} 条命令。", "note.group": "显示该组中的 {n} 条命令。"
     },
     ja: {
-      "meta.title": "FileTgie v0.4.0 — 純粋なC製の読み取り専用ファイル統計・検索CLI",
+      "meta.title": "FileTgie v0.4.1 — 純粋なC製の読み取り専用ファイル統計・検索CLI",
       "nav.features": "機能", "nav.commands": "コマンド", "nav.quickstart": "クイックスタート", "nav.companions": "組み合わせ", "nav.languages": "言語", "nav.license": "ライセンス",
       "hero.title": "軽量・読み取り専用・非依存のファイル統計＆検索 CLI",
       "hero.lede": "純粋な C と標準ライブラリだけで書かれ、同一ソースから Windows と Linux をビルドできます。各コマンドは小さく予測可能な1操作だけを行い、ファイルを変更しません。",
@@ -680,19 +680,19 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
       "install.setupTitle": "Windowsインストーラと上書き更新",
       "install.setupText": "インストーラはProgram FilesにApp PathsとPATHを登録します。既存コピー、App Paths登録、非公式削除後の残りを検出し、上書きオプションを既定でオンにします。上書き時、旧プログラムファイルは無効な <code>.old</code> バックアップフォルダへ移動し、レジストリ・PATH・ショートカットは新しいルートフォルダのファイルだけを指します。同梱アップデータはGitHubと公式サイトを確認してから静かな上書きインストールを起動します。",
       "install.linuxTitle": "Linux — ソースからビルド",
-      "install.linuxText": "v0.4.0 は Linux 互換のソースを提供します。Linux 環境で <code>make</code> を実行し、<code>./FileTgie --lang en help</code> から始めてください。検査コマンドにインストーラ・管理者権限・ネットは不要で、<code>checkupdate</code> は GitHub へ curl で問い合わせます。最後に検証済みの x86_64 glibc プレビルド tarball は v0.3.0 Release に残っています。musl/Alpine は非保証です。",
+      "install.linuxText": "v0.4.1 は Windows アップデータのみを変更します。Linux 互換ソースは <code>make</code> で利用可能。検証済み x86_64 glibc プレビルドは変更なしの v0.4.0 を維持。musl/Alpine は非保証です。",
       "install.linuxButton": "Linux ソースを取得", "install.srcTitle": "ソースコード",
       "install.srcText": "全ソースは <code>src/</code> にあり、C標準ライブラリとネイティブAPIだけを使用。Windowsで <code>build.bat</code>、Linuxで <code>make</code> を実行。WindowsアップデータはWindowsでのみビルドされます。",
       "footer.author": "作者", "footer.license": "ライセンス",
       "footer.licenseText": "LGPL-3.0-or-later（GNU劣等一般公衆利用許諾書第3版以降）。完全な法的文面はLICENSE、平易なリンク説明はCOPYING。",
       "footer.version": "バージョン",
-      "footer.versionText": "v0.4.0 は reminder をカスタム可能な読み取り専用更新チェックに拡張。<code>reminder on</code> は既定1分ごと、<code>every N</code> は1–1439分を指定、daily/hourly も維持。同梱アップデータはGitHubと公式サイトを確認し、新バージョンごとに通知を1回表示。静かな上書きで旧ファイルは無効な .old に保存。Linux は手動 cron と更新手順を表示します。バージョンの基準は src/commands.h（FILETGIE_VERSION）。",
+      "footer.versionText": "v0.4.1 は Windows 向けパッチです。独立アップデータは白い <code>=</code> のダウンロードバーを表示し、緑の <code>&gt;</code> が完了バイト、失敗原因を具体的に報告します。カスタム reminder、.old バックアップ上書き、読み取り専用統計は変更なし。版の基準は src/commands.h（FILETGIE_VERSION）。",
       "groups.all": "すべて", "groups.system": "システムとログ", "groups.stats": "統計",
       "groups.text": "テキストと行数", "groups.search": "検索", "groups.verify": "検証と整合性",
       "note.all": "CMD_TABLE の全 {n} コマンドを表示。", "note.group": "このグループの {n} コマンドを表示。"
     },
     ru: {
-      "meta.title": "FileTgie v0.4.0 — Лёгкая утилита статистики и поиска файлов на чистом C",
+      "meta.title": "FileTgie v0.4.1 — Лёгкая утилита статистики и поиска файлов на чистом C",
       "nav.features": "Возможности", "nav.commands": "Команды", "nav.quickstart": "Быстрый старт", "nav.companions": "Партнёры", "nav.languages": "Языки", "nav.license": "Лицензия",
       "hero.title": "Лёгкий инструмент статистики и поиска файлов только для чтения",
       "hero.lede": "Чистый C, только стандартная библиотека; один исходник собирается для Windows и Linux. Каждая команда делает одно предсказуемое действие и не меняет ваши файлы.",
@@ -738,13 +738,13 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
       "install.setupTitle": "Установщик Windows и обновление с заменой",
       "install.setupText": "Установщик регистрирует App Paths и PATH в Program Files. Он находит установленную копию, регистрацию App Paths или остатки после неофициального удаления и оставляет замену включённой по умолчанию. При замене прежние файлы программы перемещаются в отключённую папку резервной копии <code>.old</code>; реестр, PATH и ярлыки продолжают указывать только на новые файлы в корне. Встроенный апдейтер проверяет GitHub и сайт перед тихой установкой с заменой.",
       "install.linuxTitle": "Linux — сборка из исходников",
-      "install.linuxText": "v0.4.0 поставляется с совместимым с Linux исходным кодом; выполните <code>make</code> на Linux-хосте и начните с <code>./FileTgie --lang en help</code>. Командам проверки не нужны установщик, права администратора и сеть; <code>checkupdate</code> запрашивает GitHub через curl. Последний проверенный x86_64 glibc-бинарник остаётся в релизе v0.3.0; musl/Alpine не гарантируется.",
+      "install.linuxText": "v0.4.1 меняет только Windows-апдейтер; совместимый с Linux исходный код собирается через <code>make</code>. Проверенный бинарник x86_64 glibc остаётся без изменений в v0.4.0; musl/Alpine не гарантируется.",
       "install.linuxButton": "Получить исходники для Linux", "install.srcTitle": "Исходный код",
       "install.srcText": "Все исходники в <code>src/</code>; только стандартная библиотека C и родные API. На Windows запустите <code>build.bat</code>, на Linux — <code>make</code>; Windows-апдейтер собирается только на Windows.",
       "footer.author": "Автор", "footer.license": "Лицензия",
       "footer.licenseText": "LGPL-3.0-or-later (GNU LGPL, версия 3 или позже). Полный юридический текст в LICENSE, пояснение линковки в COPYING.",
       "footer.version": "Версия",
-      "footer.versionText": "v0.4.0 делает reminder настраиваемой проверкой только на чтение: <code>reminder on</code> по умолчанию каждую минуту, <code>every N</code> задаёт 1–1439 минут, daily/hourly сохранены. Встроенный апдейтер проверяет GitHub и сайт и показывает одно уведомление для новой версии; тихая замена сохраняет прежние файлы в отключённой .old. Linux печатает ручные cron и шаги обновления. Источник версии: src/commands.h (FILETGIE_VERSION).",
+      "footer.versionText": "v0.4.1 — Windows-патч: автономный апдейтер показывает белую полосу <code>=</code> загрузки, зелёный <code>&gt;</code> для полученных байт и точную причину сбоя. Настраиваемое напоминание, замена с резервной копией .old и статистика только для чтения без изменений. Источник версии: src/commands.h (FILETGIE_VERSION).",
       "groups.all": "Все", "groups.system": "Система и журнал", "groups.stats": "Статистика",
       "groups.text": "Текст и строки", "groups.search": "Поиск", "groups.verify": "Проверка и целостность",
       "note.all": "Показаны все {n} команд из CMD_TABLE.", "note.group": "Показаны {n} команд этой группы."

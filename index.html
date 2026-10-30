@@ -171,6 +171,14 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
   font-family: var(--mono); font-size: 0.92em;
   background: var(--wash); padding: 2px 6px; border: 1px solid var(--line);
 }
+.ftg-box { border: 1px solid var(--line); background: var(--paper); padding: 20px; margin-top: 22px; }
+.ftg-title { font-size: 18px; margin: 6px 0 8px; }
+.ftg-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 16px; }
+.ftg-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 13.5px; }
+.ftg-table th, .ftg-table td { border: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; word-break: break-word; }
+.ftg-table th { width: 30%; font-family: var(--mono); background: var(--wash); }
+.ftg-rules { font-size: 14px; color: rgba(26,26,26,0.78); }
+.ftg-rules li { margin: 8px 0 8px 20px; }
 
 /* ===== Languages ===== */
 .lang-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 22px; }
@@ -232,6 +240,7 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
   .features-grid { grid-template-columns: repeat(2, 1fr); }
   .stat-grid { grid-template-columns: repeat(4, 1fr); }
   .cmd-list { grid-template-columns: repeat(2, 1fr); column-gap: 28px; }
+  .ftg-grid { grid-template-columns: 1.15fr 1fr; }
   .lang-grid { grid-template-columns: repeat(4, 1fr); }
   .install-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: repeat(3, 1fr); }
@@ -253,6 +262,7 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
       <a href="#features" data-i18n="nav.features">Features</a>
       <a href="#commands" data-i18n="nav.commands">Commands</a>
       <a href="#quickstart" data-i18n="nav.quickstart">Quick start</a>
+      <a href="#ftg" data-i18n="nav.ftg">Scripts</a>
       <a href="#companions" data-i18n="nav.companions">Companions</a>
       <a href="#languages" data-i18n="nav.languages">Languages</a>
       <a href="#license" data-i18n="nav.license">License</a>
@@ -400,6 +410,47 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
       <li data-i18n-html="note.update"><strong>Updates:</strong> <code>checkupdate</code> is read-only; <code>update</code> manually checks GitHub and the website before a silent Windows overwrite. <code>reminder on</code> defaults to a 1-minute read-only check, <code>reminder on every 5</code> sets a 5-minute interval, <code>reminder status</code> reports the task, and <code>reminder off</code> deletes it. One notification appears for each newly discovered version.</li>
       <li data-i18n-html="note.ftg"><strong>Simple .ftg scripts:</strong> save repeated commands in a plain-text file. Use <code>#</code> for comments, <code>set name = value</code> for variables, <code>$name</code> substitution, <code>echo</code>, <code>lang</code> and <code>exit</code>. It has no loop, condition, math or pipe; a failed line stops the script and prints its line number.</li>
     </ul>
+
+    <div class="ftg-box" id="ftg">
+      <div class="eyebrow" data-i18n="ftg.eyebrow">.ftg script layer</div>
+      <h3 class="ftg-title" data-i18n="ftg.title">Ordered plain-text scripts for existing commands</h3>
+      <p data-i18n-html="ftg.sub">A <code>.ftg</code> file runs top to bottom. It delegates only existing FileTgie commands; it is not a programming language and has no loop, condition, arithmetic, pipe, background task, output redirect or function definition.</p>
+      <div class="example">
+        <div class="example-head"><span class="ex-desc" data-i18n="ftg.sampleDesc">Minimal .ftg sample</span></div>
+        <pre>set folder = .
+echo Inspecting $folder / ${folder}
+exists $folder
+count $folder
+du $folder
+lang en
+version
+exit 0</pre>
+      </div>
+      <div class="ftg-grid">
+        <table class="ftg-table" aria-label=".ftg syntax">
+          <tbody>
+            <tr><th><code># ...</code></th><td data-i18n-html="ftg.row.comment">Whole-line comment after trimming spaces; it is not executed.</td></tr>
+            <tr><th><code>set name = value</code></th><td data-i18n-html="ftg.row.set">Save a variable. Name starts with a letter or <code>_</code> and contains only letters, digits and <code>_</code>; join remaining tokens with spaces; repeat <code>set</code> updates the same variable.</td></tr>
+            <tr><th><code>$name</code> / <code>${name}</code></th><td data-i18n-html="ftg.row.substitute">Substitute a previously saved variable; an unknown name or unclosed <code>${</code> fails instead of being passed literally.</td></tr>
+            <tr><th><code>"..."</code> / <code>'...'</code></th><td data-i18n-html="ftg.row.quote">Quote-aware tokenization keeps spaces in paths and text; an unclosed quote fails.</td></tr>
+            <tr><th><code>echo text...</code></th><td data-i18n-html="ftg.row.echo">Expand variables, join tokens with spaces and print one line; there is no formatting language.</td></tr>
+            <tr><th><code>lang cn|en|ja|ru</code></th><td data-i18n-html="ftg.row.lang">Change only the output language for later delegated commands in this script; the code is case-insensitive and unknown codes fail.</td></tr>
+            <tr><th><code>exit [code]</code></th><td data-i18n-html="ftg.row.exit">Stop early. Bare <code>exit</code> returns 0; <code>code</code> must be a nonnegative integer, with no extra arguments.</td></tr>
+            <tr><th><em>other line</em></th><td data-i18n-html="ftg.row.command">Match the command name case-insensitively after variable expansion and delegate to the built-in command; an unknown command or failed delegation stops the script and prints the failing line number.</td></tr>
+          </tbody>
+        </table>
+        <div>
+          <p data-i18n-html="ftg.run.title">Run either form:</p>
+          <pre>FileTgie run my.ftg
+FileTgie my.ftg</pre>
+          <ul class="ftg-rules">
+            <li data-i18n-html="ftg.rule.blank">Blank lines are skipped; an empty or comment-only script ends successfully with exit code 0.</li>
+            <li data-i18n-html="ftg.rule.errors">Missing file, invalid <code>set</code>, unknown variable, unclosed quote, extra arguments, invalid exit code, invalid language, unknown command and failed command all return non-zero.</li>
+            <li data-i18n-html="ftg.rule.limits">Current fixed limits: one line 4096 bytes, 32 tokens, 32 variables, variable name 64 characters and variable value 2048 characters.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -525,7 +576,7 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
     en: {
       "meta.title": "FileTgie v0.5.5 — Read-only file statistics & search CLI in pure C",
       "nav.features": "Features", "nav.commands": "Commands", "nav.quickstart": "Quick start",
-      "nav.companions": "Companions", "nav.languages": "Languages", "nav.license": "License",
+      "nav.ftg": "Scripts", "nav.companions": "Companions", "nav.languages": "Languages", "nav.license": "License",
       "hero.title": "Lightweight, read-only, zero-dependency file statistics & search CLI",
       "hero.lede": "Written in pure C with the standard library only, one source tree builds for Windows and Linux. Every command does one small, predictable thing and never touches your files.",
       "hero.installer": "Download installer (Windows)", "hero.repo": "GitHub repository",
@@ -556,6 +607,21 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
       "note.help": "Run with no arguments or <code>help</code> to print the full command table (exit code 0).",
       "note.update": "<strong>Updates:</strong> <code>checkupdate</code> is read-only; <code>update</code> manually checks GitHub and the website before a silent Windows overwrite. <code>reminder on</code> defaults to a 1-minute read-only check, <code>reminder on every 5</code> sets a 5-minute interval, <code>reminder status</code> reports the task, and <code>reminder off</code> deletes it. One notification appears for each newly discovered version.",
       "note.ftg": "<strong>Simple .ftg scripts:</strong> save repeated commands in a plain-text file. Use <code>#</code> for comments, <code>set name = value</code> (quote values that contain spaces), <code>$name</code>/<code>${name}</code> substitution, <code>echo</code>, <code>lang cn|en|ja|ru</code> and <code>exit [code]</code>. It has no loop, condition, math, pipe, redirect or function; a missing script, unclosed quote, invalid set, unknown variable (<code>Unknown variable: %s</code>), extra arguments, invalid exit code or invalid language fail with a non-zero code, and a failed line stops the script and prints its line number.",
+      "ftg.eyebrow": ".ftg script layer", "ftg.title": "Ordered plain-text scripts for existing commands",
+      "ftg.sub": "A <code>.ftg</code> file runs top to bottom. It delegates only existing FileTgie commands; it is not a programming language and has no loop, condition, arithmetic, pipe, background task, output redirect or function definition.",
+      "ftg.sampleDesc": "Minimal .ftg sample",
+      "ftg.row.comment": "Whole-line comment after trimming spaces; it is not executed.",
+      "ftg.row.set": "Save a variable. Name starts with a letter or <code>_</code> and contains only letters, digits and <code>_</code>; remaining tokens are joined with spaces; repeating <code>set</code> updates the same variable.",
+      "ftg.row.substitute": "Substitute a previously saved variable; an unknown name or unclosed <code>${</code> fails instead of being passed literally.",
+      "ftg.row.quote": "Quote-aware tokenization keeps spaces in paths and text; an unclosed quote fails.",
+      "ftg.row.echo": "Expand variables, join tokens with spaces and print one line; there is no formatting language.",
+      "ftg.row.lang": "Change only the output language for later delegated commands in this script; the code is case-insensitive and unknown codes fail.",
+      "ftg.row.exit": "Stop early. Bare <code>exit</code> returns 0; <code>code</code> must be a nonnegative integer, with no extra arguments.",
+      "ftg.row.command": "Match the command name case-insensitively after variable expansion and delegate to the built-in command; an unknown command or failed delegation stops the script and prints the failing line number.",
+      "ftg.run.title": "Run either form:",
+      "ftg.rule.blank": "Blank lines are skipped; an empty or comment-only script ends successfully with exit code 0.",
+      "ftg.rule.errors": "Missing file, invalid <code>set</code>, unknown variable, unclosed quote, extra arguments, invalid exit code, invalid language, unknown command and failed command all return non-zero.",
+      "ftg.rule.limits": "Current fixed limits: one line 4096 bytes, 32 tokens, 32 variables, variable name 64 characters and variable value 2048 characters.",
       "comp.eyebrow": "Optional companions",
       "comp.title": "Pair FileTgie with independent tools you already like",
       "comp.sub": "FileTgie does not download, call, bundle or require any companion below. Install them separately; let each tool do the job it does best, and use FileTgie for exact counts, line totals, size, hashes and directory comparison.",
@@ -590,7 +656,7 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
     },
     cn: {
       "meta.title": "FileTgie v0.5.5 — 纯 C 只读文件统计与搜索命令行工具",
-      "nav.features": "功能", "nav.commands": "命令", "nav.quickstart": "快速开始", "nav.companions": "搭配工具", "nav.languages": "界面语言", "nav.license": "许可证",
+      "nav.features": "功能", "nav.commands": "命令", "nav.quickstart": "快速开始", "nav.ftg": "脚本", "nav.companions": "搭配工具", "nav.languages": "界面语言", "nav.license": "许可证",
       "hero.title": "轻量、只读、零依赖的文件统计与搜索命令行工具",
       "hero.lede": "纯 C 仅用标准库编写，同一套源码可构建 Windows 与 Linux 版本。每条命令只做一件小而确定的事，绝不触碰你的文件。",
       "hero.installer": "下载安装程序（Windows）", "hero.repo": "GitHub 仓库",
@@ -618,6 +684,21 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
       "note.help": "不带参数或运行 <code>help</code> 可打印完整命令表（退出码 0）。",
       "note.update": "<strong>更新：</strong><code>checkupdate</code> 只读检查；<code>update</code> 手动检查 GitHub 与官网后，在 Windows 静默覆盖。<code>reminder on</code> 缺省每 1 分钟只读检查，<code>reminder on every 5</code> 改为每 5 分钟，<code>reminder status</code> 查看任务，<code>reminder off</code> 删除任务；每个新版本只提示一次。",
       "note.ftg": "<strong>简单 .ftg 脚本：</strong>把重复命令保存为纯文本文件。<code>#</code> 是注释，<code>set 名称 = 值</code> 保存变量（带空格的值加引号），<code>$名称</code>/<code>${名称}</code> 替换变量，另支持 <code>echo</code>、<code>lang cn|en|ja|ru</code> 与 <code>exit [code]</code>。没有循环、条件、数学、管道、重定向或函数；脚本缺失、未闭合引号、非法 set、未知变量（<code>Unknown variable: %s</code>）、多余参数、非法退出码或非法语言均返回非零，某一行失败会停止并打印行号。",
+      "ftg.eyebrow": ".ftg 脚本层", "ftg.title": "按顺序委派已有命令的纯文本脚本",
+      "ftg.sub": "<code>.ftg</code> 文件从上到下逐行运行，只能委派已经存在的 FileTgie 命令；它不是编程语言，没有循环、条件、算术、管道、后台任务、输出重定向或函数定义。",
+      "ftg.sampleDesc": "最小 .ftg 示例",
+      "ftg.row.comment": "去掉首尾空格后，以 <code>#</code> 开头的整行是注释，不会执行。",
+      "ftg.row.set": "保存变量。名称以字母或 <code>_</code> 开头，只允许字母、数字和 <code>_</code>；<code>=</code> 后的 token 用空格拼接；重复 <code>set</code> 会更新同名变量。",
+      "ftg.row.substitute": "替换已保存变量；引用未定义名称或未闭合 <code>${</code> 会报错，不会把字面 <code>$name</code> 传给命令。",
+      "ftg.row.quote": "引号感知分词，保留路径和文字中的空格；引号未闭合会报错。",
+      "ftg.row.echo": "展开变量后用空格拼接并打印一行；没有格式化语法。",
+      "ftg.row.lang": "只切换本脚本后续委派命令的输出语言；语言码大小写不敏感，未知语言码直接报错。",
+      "ftg.row.exit": "提前结束。裸 <code>exit</code> 返回 0；<code>code</code> 必须是非负整数，且不能有多余参数。",
+      "ftg.row.command": "变量展开后按命令名大小写不敏感匹配并委派给内置命令；未知命令或委派失败都会停止脚本并打印失败行号。",
+      "ftg.run.title": "两种执行方式均可：",
+      "ftg.rule.blank": "空行跳过；空文件或纯注释脚本正常结束，退出码为 0。",
+      "ftg.rule.errors": "脚本缺失、非法 <code>set</code>、未知变量、未闭合引号、多余参数、非法退出码、非法语言、未知命令和命令失败都返回非零。",
+      "ftg.rule.limits": "当前固定容量：单行 4096 字节、32 个 token、32 个变量、变量名 64 字符、变量值 2048 字符。",
       "comp.eyebrow": "可选搭配工具",
       "comp.title": "让 FileTgie 搭配你已经喜欢的独立工具",
       "comp.sub": "FileTgie 不下载、不调用、不打包、也不依赖下面任何工具。请独立安装；让每个工具做自己擅长的事，FileTgie 负责精确数量、行数、大小、哈希与目录对比。",
@@ -651,7 +732,7 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
     },
     ja: {
       "meta.title": "FileTgie v0.5.5 — 純粋なC製の読み取り専用ファイル統計・検索CLI",
-      "nav.features": "機能", "nav.commands": "コマンド", "nav.quickstart": "クイックスタート", "nav.companions": "組み合わせ", "nav.languages": "言語", "nav.license": "ライセンス",
+      "nav.features": "機能", "nav.commands": "コマンド", "nav.quickstart": "クイックスタート", "nav.ftg": "スクリプト", "nav.companions": "組み合わせ", "nav.languages": "言語", "nav.license": "ライセンス",
       "hero.title": "軽量・読み取り専用・非依存のファイル統計＆検索 CLI",
       "hero.lede": "純粋な C と標準ライブラリだけで書かれ、同一ソースから Windows と Linux をビルドできます。各コマンドは小さく予測可能な1操作だけを行い、ファイルを変更しません。",
       "hero.installer": "インストーラをダウンロード（Windows）", "hero.repo": "GitHub リポジトリ",
@@ -679,6 +760,21 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
       "note.help": "引数なし、または <code>help</code> で全コマンド表を表示（終了コード0）。",
       "note.update": "<strong>更新:</strong> <code>checkupdate</code> は読み取り専用。<code>update</code> は GitHub と公式サイトを手動で確認し、Windows で静かに上書きします。<code>reminder on</code> は既定で1分ごとの読み取り専用チェック、<code>reminder on every 5</code> は5分間隔、<code>reminder status</code> はタスク表示、<code>reminder off</code> は削除。新バージョンごとに通知は1回だけです。",
       "note.ftg": "<strong>簡単な .ftg スクリプト:</strong> 繰り返すコマンドをテキストファイルに保存します。<code>#</code> はコメント、<code>set name = value</code> は変数（スペースを含む値は引用符）、<code>$name</code>/<code>${name}</code> は置換、<code>echo</code>・<code>lang cn|en|ja|ru</code>・<code>exit [code]</code> に対応。ループ・条件・計算・パイプ・リダイレクト・関数はなく、スクリプト不在・未閉じ引用符・不正 set・未知変数（<code>Unknown variable: %s</code>）・余分な引数・不正終了コード・不正言語は非ゼロで失敗、失敗行で停止して行番号を出します。",
+      "ftg.eyebrow": ".ftg スクリプト層", "ftg.title": "既存コマンドを順番に呼ぶだけのテキストスクリプト",
+      "ftg.sub": "<code>.ftg</code> は上から下へ1行ずつ実行され、既存の FileTgie コマンドだけを委派します。プログラミング言語ではなく、ループ・条件・算術・パイプ・バックグラウンドタスク・出力リダイレクト・関数定義はありません。",
+      "ftg.sampleDesc": "最小 .ftg サンプル",
+      "ftg.row.comment": "前後の空白を取った後、<code>#</code> で始まる全行はコメントで実行しません。",
+      "ftg.row.set": "変数を保存します。名前は文字または <code>_</code> で始まり、文字・数字・<code>_</code> のみ使用可。<code>=</code> 以降の token は空白で連結し、同じ名前の <code>set</code> は更新します。",
+      "ftg.row.substitute": "保存済み変数を置換します。未定義名や閉じられない <code>${</code> は失敗し、字面の <code>$name</code> を渡しません。",
+      "ftg.row.quote": "引用符で囲むとパスや文中の空白を保持します。閉じられない引用符は失敗します。",
+      "ftg.row.echo": "変数を展開し、token を空白で連結して1行出力します。書式言語はありません。",
+      "ftg.row.lang": "このスクリプトの後続コマンドだけ出力言語を切替えます。言語コードは大文字小文字を区別せず、未知コードは失敗します。",
+      "ftg.row.exit": "早めに停止します。裸の <code>exit</code> は 0 を返し、<code>code</code> は非負整数のみ、余分な引数は不可です。",
+      "ftg.row.command": "変数展開後、コマンド名を大文字小文字を区別せず一致させて内蔵コマンドへ委派します。未知コマンドまたは委派失敗は停止して失敗行番号を出します。",
+      "ftg.run.title": "どちらの形式でも実行できます：",
+      "ftg.rule.blank": "空行は無視されます。空ファイルやコメントだけのファイルは終了コード0で正常終了します。",
+      "ftg.rule.errors": "ファイル不在・不正 <code>set</code>・未知変数・未閉じ引用符・余分な引数・不正終了コード・不正言語・未知コマンド・コマンド失敗はすべて非ゼロを返します。",
+      "ftg.rule.limits": "現行の固定上限：1行4096バイト、32トークン、32変数、変数名64文字、変数値2048文字。",
       "comp.eyebrow": "任意の組み合わせ",
       "comp.title": "好きな独立ツールと FileTgie を組み合わせる",
       "comp.sub": "FileTgie は下記ツールをダウンロード・呼び出し・同梱・依存しません。別々にインストールし、それぞれ得意な仕事を任せ、FileTgie は正確な件数・行数・サイズ・ハッシュ・ディレクトリ比較に使います。",
@@ -712,7 +808,7 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
     },
     ru: {
       "meta.title": "FileTgie v0.5.5 — Лёгкая утилита статистики и поиска файлов на чистом C",
-      "nav.features": "Возможности", "nav.commands": "Команды", "nav.quickstart": "Быстрый старт", "nav.companions": "Партнёры", "nav.languages": "Языки", "nav.license": "Лицензия",
+      "nav.features": "Возможности", "nav.commands": "Команды", "nav.quickstart": "Быстрый старт", "nav.ftg": "Скрипты", "nav.companions": "Партнёры", "nav.languages": "Языки", "nav.license": "Лицензия",
       "hero.title": "Лёгкий инструмент статистики и поиска файлов только для чтения",
       "hero.lede": "Чистый C, только стандартная библиотека; один исходник собирается для Windows и Linux. Каждая команда делает одно предсказуемое действие и не меняет ваши файлы.",
       "hero.installer": "Скачать установщик (Windows)", "hero.repo": "Репозиторий GitHub",
@@ -740,6 +836,21 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
       "note.help": "Запуск без аргументов или <code>help</code> печатает полную таблицу команд (код выхода 0).",
       "note.update": "<strong>Обновления:</strong> <code>checkupdate</code> работает только на чтение; <code>update</code> вручную проверяет GitHub и сайт перед тихой заменой в Windows. <code>reminder on</code> по умолчанию проверяет каждую 1 минуту, <code>reminder on every 5</code> задаёт интервал 5 минут, <code>reminder status</code> показывает задачу, <code>reminder off</code> удаляет её. Одно уведомление для каждой новой версии.",
       "note.ftg": "<strong>Простые скрипты .ftg:</strong> сохраните повторяющиеся команды в текстовом файле. <code>#</code> — комментарий, <code>set name = value</code> — переменная (значения с пробелами берите в кавычки), <code>$name</code>/<code>${name}</code> — подстановка; поддерживаются <code>echo</code>, <code>lang cn|en|ja|ru</code> и <code>exit [code]</code>. Нет циклов, условий, математики, пайпов, перенаправлений и функций; отсутствие скрипта, незакрытая кавычка, неверный set, неизвестная переменная (<code>Unknown variable: %s</code>), лишние аргументы, неверный код выхода или неверный язык дают ненулевой код, а неудачная строка останавливает скрипт и печатает номер строки.",
+      "ftg.eyebrow": "Слой скриптов .ftg", "ftg.title": "Последовательные текстовые скрипты для существующих команд",
+      "ftg.sub": "Файл <code>.ftg</code> выполняется сверху вниз и только делегирует уже существующие команды FileTgie. Это не язык программирования: нет циклов, условий, арифметики, пайпов, фоновых задач, перенаправления вывода и функций.",
+      "ftg.sampleDesc": "Минимальный пример .ftg",
+      "ftg.row.comment": "После удаления крайних пробелов вся строка, начинающаяся с <code>#</code>, является комментарием и не выполняется.",
+      "ftg.row.set": "Сохранить переменную. Имя начинается с буквы или <code>_</code> и содержит только буквы, цифры и <code>_</code>; оставшиеся токены объединяются пробелами; повторный <code>set</code> обновляет ту же переменную.",
+      "ftg.row.substitute": "Подставить ранее сохранённую переменную; неизвестное имя или незакрытая <code>${</code> завершаются ошибкой, а не передаются буквально.",
+      "ftg.row.quote": "Кавычки сохраняют пробелы в путях и тексте; незакрытая кавычка завершается ошибкой.",
+      "ftg.row.echo": "Раскрыть переменные, объединить токены пробелами и вывести одну строку; языка форматирования нет.",
+      "ftg.row.lang": "Изменяет только язык вывода последующих команд этого скрипта; код нечувствителен к регистру, неизвестный код завершается ошибкой.",
+      "ftg.row.exit": "Ранняя остановка. Голый <code>exit</code> возвращает 0; <code>code</code> должен быть неотрицательным целым числом, без лишних аргументов.",
+      "ftg.row.command": "После подстановки переменных имя команды сопоставляется без учёта регистра и делегируется встроенной команде; неизвестная команда или неудачная делегация останавливает скрипт и печатает номер строки.",
+      "ftg.run.title": "Подходят оба варианта запуска:",
+      "ftg.rule.blank": "Пустые строки пропускаются; пустой файл или только комментарии успешно завершается с кодом 0.",
+      "ftg.rule.errors": "Отсутствующий файл, неверный <code>set</code>, неизвестная переменная, незакрытая кавычка, лишние аргументы, неверный код выхода, неверный язык, неизвестная команда и неудачная команда возвращают ненулевой код.",
+      "ftg.rule.limits": "Текущие фиксированные лимиты: строка 4096 байт, 32 токена, 32 переменные, имя переменной 64 символа, значение переменной 2048 символов.",
       "comp.eyebrow": "Необязательные партнёры",
       "comp.title": "Свяжите FileTgie с независимыми инструментами",
       "comp.sub": "FileTgie не скачивает, не вызывает, не упаковывает и не требует приведённые ниже инструменты. Устанавливайте их отдельно: пусть каждый делает своё дело, а FileTgie считает точные количество, строки, размеры, хеши и сравнивает каталоги.",

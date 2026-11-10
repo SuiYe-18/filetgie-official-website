@@ -290,7 +290,7 @@ h1, h2, h3 { font-weight: 700; line-height: 1.2; }
     </div>
     <div class="cta-row" style="margin-top:10px;">
       <a class="btn btn-ghost" data-i18n="hero.portable" href="https://github.com/SuiYe-18/FileTgie/releases/download/v0.5.7/FileTgie.windows.0.5.7.portable.zip">Windows portable ZIP</a>
-      <a class="btn btn-ghost" data-i18n="hero.linux" href="https://github.com/SuiYe-18/FileTgie/releases/download/v0.5.7/FileTgie.source.0.5.7.zip">Linux build from source</a>
+      <a class="btn btn-ghost" data-i18n="hero.linux" href="https://github.com/SuiYe-18/FileTgie/releases/latest/download/FileTgie.linux.0.5.7.tar.gz">Linux tarball</a>
       <a class="btn btn-ghost" data-i18n="hero.source" href="https://github.com/SuiYe-18/FileTgie/releases/download/v0.5.7/FileTgie.source.0.5.7.zip">Source archive</a>
       <a class="btn btn-ghost" data-i18n="hero.explore" href="#commands">Explore 65 commands</a>
     </div>
@@ -530,10 +530,10 @@ FileTgie my.ftg</pre>
         <p data-i18n-html="install.setupText">The installer registers App Paths and PATH under Program Files. It detects an installed copy, App Paths registration, or leftover files after a non-official deletion, and keeps the overwrite option checked by default. On overwrite, previous program files move to a disabled <code>.old</code> backup folder; the registry, PATH and shortcuts keep pointing only to the new root-folder files. The bundled updater checks GitHub and the website before launching a silent overwrite install.</p>
       </div>
       <div class="install-card">
-        <h3 data-i18n="install.linuxTitle">Linux — build from source</h3>
-        <p data-i18n-html="install.linuxText">v0.5.1 adds the simple <code>run</code> script layer using only the C standard library; Linux-compatible source code remains available for <code>make</code>. The verified x86_64 glibc prebuilt package stays unchanged as v0.4.0; musl/Alpine is not guaranteed.</p>
+        <h3 data-i18n="install.linuxTitle">Linux — prebuilt tarball or build from source</h3>
+        <p data-i18n-html="install.linuxText">v0.5.7 ships a verified x86_64 glibc tarball: extract it and run <code>./FileTgie --lang en help</code>. Building from source with <code>make</code> also works; musl/Alpine is not guaranteed.</p>
         <pre>make</pre>
-        <a class="btn btn-ghost" data-i18n="install.linuxButton" href="https://github.com/SuiYe-18/FileTgie/releases/download/v0.5.7/FileTgie.source.0.5.7.zip">Build Linux from source</a>
+        <a class="btn btn-ghost" data-i18n="install.linuxButton" href="https://github.com/SuiYe-18/FileTgie/releases/latest/download/FileTgie.linux.0.5.7.tar.gz">Download Linux tarball</a>
       </div>
       <div class="install-card">
         <h3 data-i18n="install.srcTitle">Source code</h3>
@@ -580,7 +580,7 @@ FileTgie my.ftg</pre>
       "hero.title": "Lightweight, read-only, zero-dependency file statistics & search CLI",
       "hero.lede": "Written in pure C with the standard library only, one source tree builds for Windows and Linux. Every command does one small, predictable thing and never touches your files.",
       "hero.installer": "Download installer (Windows)", "hero.repo": "GitHub repository",
-      "hero.portable": "Windows portable ZIP", "hero.linux": "Linux build from source", "hero.source": "Source archive",
+      "hero.portable": "Windows portable ZIP", "hero.linux": "Linux tarball", "hero.source": "Source archive",
       "hero.explore": "Explore 65 commands",
       "stat.commands": "built-in commands", "stat.langs": "interface languages",
       "stat.deps": "third-party dependencies", "stat.platforms": "platforms: Windows + Linux",
@@ -642,9 +642,9 @@ FileTgie my.ftg</pre>
       "install.winText": "The portable package contains <code>FileTgie.exe</code>, <code>FileTgieUpdater.exe</code>, README, User Manual, LICENSE, COPYING and <code>examples/demo.ftg</code>. It writes no registry keys and nothing outside the folder; unzip and run, delete the folder to uninstall. The only file written next to the executable is its own <code>filetgie.log</code>.",
       "install.setupTitle": "Windows installer and overwrite upgrade",
       "install.setupText": "The installer registers App Paths and PATH under Program Files. It detects an installed copy, App Paths registration, or leftover files after a non-official deletion, and keeps the overwrite option checked by default. On overwrite, previous program files move to a disabled <code>.old</code> backup folder; the registry, PATH and shortcuts keep pointing only to the new root-folder files. The bundled updater checks GitHub and the website before launching a silent overwrite install.",
-      "install.linuxTitle": "Linux — build from source",
-      "install.linuxText": "v0.5.1 adds the simple <code>run</code> script layer using only the C standard library; Linux-compatible source code remains available for <code>make</code>. The verified x86_64 glibc prebuilt package stays unchanged as v0.4.0; musl/Alpine is not guaranteed.",
-      "install.linuxButton": "Build Linux from source", "install.srcTitle": "Source code",
+      "install.linuxTitle": "Linux — prebuilt tarball or build from source",
+      "install.linuxText": "v0.5.7 ships a verified x86_64 glibc tarball: extract it and run <code>./FileTgie --lang en help</code>. Building from source with <code>make</code> also works; musl/Alpine is not guaranteed.",
+      "install.linuxButton": "Download Linux tarball", "install.srcTitle": "Source code",
       "install.srcText": "All sources live under <code>src/</code> and use only the C standard library and native platform APIs; <code>examples/demo.ftg</code> shows the script format. Run <code>build.bat</code> on Windows or <code>make</code> on Linux; the Windows updater builds only on Windows.",
       "footer.author": "Author", "footer.license": "License",
       "footer.licenseText": "LGPL-3.0-or-later (GNU Lesser General Public License, version 3 or later). Full legal text in LICENSE; plain-language linking notes in COPYING.",
@@ -660,7 +660,7 @@ FileTgie my.ftg</pre>
       "hero.title": "轻量、只读、零依赖的文件统计与搜索命令行工具",
       "hero.lede": "纯 C 仅用标准库编写，同一套源码可构建 Windows 与 Linux 版本。每条命令只做一件小而确定的事，绝不触碰你的文件。",
       "hero.installer": "下载安装程序（Windows）", "hero.repo": "GitHub 仓库",
-      "hero.portable": "Windows 便携 ZIP", "hero.linux": "Linux 源码构建", "hero.source": "源码包", "hero.explore": "查看 65 条命令",
+      "hero.portable": "Windows 便携 ZIP", "hero.linux": "Linux 预编译包", "hero.source": "源码包", "hero.explore": "查看 65 条命令",
       "stat.commands": "内置命令", "stat.langs": "界面语言", "stat.deps": "第三方依赖", "stat.platforms": "平台：Windows + Linux",
       "features.eyebrow": "功能", "features.title": "小而克制，默认安全", "features.sub": "每条命令只执行一个边界清晰的操作；结果明确可预期，不会出现意外副作用。",
       "f.light.title": "轻量", "f.light.text": "单个紧凑可执行文件，无需运行时、包管理器或配置文件。",
@@ -718,9 +718,9 @@ FileTgie my.ftg</pre>
       "install.winText": "便携包包含 <code>FileTgie.exe</code>、<code>FileTgieUpdater.exe</code>、README、User Manual、LICENSE、COPYING 与 <code>examples/demo.ftg</code>；不写注册表，也不写文件夹外内容；解压运行，删除文件夹即卸载。可执行文件旁唯一写入的是自身 <code>filetgie.log</code>。",
       "install.setupTitle": "Windows 安装包与覆盖升级",
       "install.setupText": "安装包在 Program Files 注册 App Paths 与 PATH。它会检测已安装副本、App Paths 注册，或非官方删除后的残留文件，并默认勾选覆盖选项。覆盖时旧程序文件先移入禁用的 <code>.old</code> 备份文件夹；注册表、PATH 与快捷方式始终只指向根目录新文件。内置更新器会先检查 GitHub 与官网，再启动静默覆盖安装。",
-      "install.linuxTitle": "Linux — 从源码构建",
-      "install.linuxText": "v0.5.1 新增只使用 C 标准库的简单 <code>run</code> 脚本层；兼容 Linux 的源码仍可执行 <code>make</code> 构建。已验证的 x86_64 glibc 预编译包保持未改动的 v0.4.0；不保证 musl/Alpine。",
-      "install.linuxButton": "获取 Linux 源码", "install.srcTitle": "源代码",
+      "install.linuxTitle": "Linux — 预编译包或源码构建",
+      "install.linuxText": "v0.5.7 随 Release 提供已验证的 x86_64 glibc 压缩包，解压后直接运行 <code>./FileTgie --lang en help</code>；也可用 <code>make</code> 从源码构建。不保证 musl/Alpine。",
+      "install.linuxButton": "下载 Linux 压缩包", "install.srcTitle": "源代码",
       "install.srcText": "所有源码位于 <code>src/</code>，仅使用 C 标准库与平台原生 API；<code>examples/demo.ftg</code> 展示脚本格式。Windows 运行 <code>build.bat</code>，Linux 运行 <code>make</code>；Windows 更新器只在 Windows 构建。",
       "footer.author": "作者", "footer.license": "许可证",
       "footer.licenseText": "LGPL-3.0-or-later（GNU 宽通用公共许可证，第 3 版或更新）。完整法律文本见 LICENSE，通俗链接说明见 COPYING。",
@@ -736,7 +736,7 @@ FileTgie my.ftg</pre>
       "hero.title": "軽量・読み取り専用・非依存のファイル統計＆検索 CLI",
       "hero.lede": "純粋な C と標準ライブラリだけで書かれ、同一ソースから Windows と Linux をビルドできます。各コマンドは小さく予測可能な1操作だけを行い、ファイルを変更しません。",
       "hero.installer": "インストーラをダウンロード（Windows）", "hero.repo": "GitHub リポジトリ",
-      "hero.portable": "Windows ポータブル ZIP", "hero.linux": "Linux ソースビルド", "hero.source": "ソースアーカイブ", "hero.explore": "65コマンドを見る",
+      "hero.portable": "Windows ポータブル ZIP", "hero.linux": "Linux tarball", "hero.source": "ソースアーカイブ", "hero.explore": "65コマンドを見る",
       "stat.commands": "内蔵コマンド", "stat.langs": "対応言語", "stat.deps": "サードパーティ依存", "stat.platforms": "対応: Windows + Linux",
       "features.eyebrow": "機能", "features.title": "設計は小さく、既定で安全", "features.sub": "各コマンドは範囲の明確な単一操作を行い、結果は分かりやすく予測でき、予期しない副作用はありません。",
       "f.light.title": "軽量", "f.light.text": "単一のコンパクトな実行ファイル。ランタイム、パッケージマネージャ、設定ファイルは不要です。",
@@ -794,9 +794,9 @@ FileTgie my.ftg</pre>
       "install.winText": "同梱は <code>FileTgie.exe</code>、<code>FileTgieUpdater.exe</code>、README、User Manual、LICENSE、COPYING、<code>examples/demo.ftg</code>。レジストリやフォルダ外へ書き込みせず、展開して実行、フォルダ削除でアンインストール。実行ファイルの横に書くのは自身の <code>filetgie.log</code> だけです。",
       "install.setupTitle": "Windowsインストーラと上書き更新",
       "install.setupText": "インストーラはProgram FilesにApp PathsとPATHを登録します。既存コピー、App Paths登録、非公式削除後の残りを検出し、上書きオプションを既定でオンにします。上書き時、旧プログラムファイルは無効な <code>.old</code> バックアップフォルダへ移動し、レジストリ・PATH・ショートカットは新しいルートフォルダのファイルだけを指します。同梱アップデータはGitHubと公式サイトを確認してから静かな上書きインストールを起動します。",
-      "install.linuxTitle": "Linux — ソースからビルド",
-      "install.linuxText": "v0.5.1 は C標準ライブラリだけを使う簡単な <code>run</code> スクリプト層を追加します。Linux 互換ソースは <code>make</code> で利用可能。検証済み x86_64 glibc プレビルドは変更なしの v0.4.0 を維持。musl/Alpine は非保証です。",
-      "install.linuxButton": "Linux ソースを取得", "install.srcTitle": "ソースコード",
+      "install.linuxTitle": "Linux — tarball またはソースビルド",
+      "install.linuxText": "v0.5.7 は検証済みの x86_64 glibc tarball を同梱します。解凍して <code>./FileTgie --lang en help</code> を実行できます。<code>make</code> でのソースビルドも可能です。musl/Alpine は非保証です。",
+      "install.linuxButton": "Linux tarball をダウンロード", "install.srcTitle": "ソースコード",
       "install.srcText": "全ソースは <code>src/</code> にあり、C標準ライブラリとネイティブAPIだけを使用。<code>examples/demo.ftg</code> はスクリプト形式の例です。Windowsで <code>build.bat</code>、Linuxで <code>make</code> を実行。WindowsアップデータはWindowsでのみビルドされます。",
       "footer.author": "作者", "footer.license": "ライセンス",
       "footer.licenseText": "LGPL-3.0-or-later（GNU劣等一般公衆利用許諾書第3版以降）。完全な法的文面はLICENSE、平易なリンク説明はCOPYING。",
@@ -812,7 +812,7 @@ FileTgie my.ftg</pre>
       "hero.title": "Лёгкий инструмент статистики и поиска файлов только для чтения",
       "hero.lede": "Чистый C, только стандартная библиотека; один исходник собирается для Windows и Linux. Каждая команда делает одно предсказуемое действие и не меняет ваши файлы.",
       "hero.installer": "Скачать установщик (Windows)", "hero.repo": "Репозиторий GitHub",
-      "hero.portable": "Портативный ZIP для Windows", "hero.linux": "Сборка Linux из исходников", "hero.source": "Архив с исходниками", "hero.explore": "Посмотреть 65 команды",
+      "hero.portable": "Портативный ZIP для Windows", "hero.linux": "Linux tarball", "hero.source": "Архив с исходниками", "hero.explore": "Посмотреть 65 команды",
       "stat.commands": "встроенных команд", "stat.langs": "языков интерфейса", "stat.deps": "сторонних зависимостей", "stat.platforms": "платформы: Windows + Linux",
       "features.eyebrow": "Возможности", "features.title": "Мал по замыслу, безопасен по умолчанию", "features.sub": "Каждая команда выполняет одну четко ограниченную операцию. Результаты ясны; неожиданных побочных эффектов нет.",
       "f.light.title": "Лёгкость", "f.light.text": "Один компактный исполняемый файл: без среды выполнения, менеджера пакетов и конфигурации.",
@@ -870,9 +870,9 @@ FileTgie my.ftg</pre>
       "install.winText": "Содержит <code>FileTgie.exe</code>, <code>FileTgieUpdater.exe</code>, README, User Manual, LICENSE, COPYING и <code>examples/demo.ftg</code>. Не пишет реестр и файлы вне папки; распакуйте и запустите, удаление папки удаляет программу. Рядом записывается только собственный <code>filetgie.log</code>.",
       "install.setupTitle": "Установщик Windows и обновление с заменой",
       "install.setupText": "Установщик регистрирует App Paths и PATH в Program Files. Он находит установленную копию, регистрацию App Paths или остатки после неофициального удаления и оставляет замену включённой по умолчанию. При замене прежние файлы программы перемещаются в отключённую папку резервной копии <code>.old</code>; реестр, PATH и ярлыки продолжают указывать только на новые файлы в корне. Встроенный апдейтер проверяет GitHub и сайт перед тихой установкой с заменой.",
-      "install.linuxTitle": "Linux — сборка из исходников",
-      "install.linuxText": "v0.5.1 добавляет простой слой скриптов <code>run</code> только на стандартной библиотеке C; совместимый с Linux исходный код собирается через <code>make</code>. Проверенный бинарник x86_64 glibc остаётся без изменений в v0.4.0; musl/Alpine не гарантируется.",
-      "install.linuxButton": "Получить исходники для Linux", "install.srcTitle": "Исходный код",
+      "install.linuxTitle": "Linux — готовый tarball или сборка из исходников",
+      "install.linuxText": "v0.5.7 включает проверенный tarball x86_64 glibc: распакуйте и запустите <code>./FileTgie --lang en help</code>. Сборка из исходников через <code>make</code> также возможна; musl/Alpine не гарантируется.",
+      "install.linuxButton": "Скачать Linux tarball", "install.srcTitle": "Исходный код",
       "install.srcText": "Все исходники в <code>src/</code>; только стандартная библиотека C и родные API; <code>examples/demo.ftg</code> показывает формат скрипта. На Windows запустите <code>build.bat</code>, на Linux — <code>make</code>; Windows-апдейтер собирается только на Windows.",
       "footer.author": "Автор", "footer.license": "Лицензия",
       "footer.licenseText": "LGPL-3.0-or-later (GNU LGPL, версия 3 или позже). Полный юридический текст в LICENSE, пояснение линковки в COPYING.",
